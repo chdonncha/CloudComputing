@@ -229,6 +229,64 @@ Docker also is supported by nitrous.io
 
 <strong>Docker:</strong>
 
-* allows each container to share each library within each library within the
-userspace so they be started and stopped very quickly and can be deployed much
-more efficently
+* allows each container to share each library within the userspace so they be
+started and stopped very quickly and can be deployed much more efficently
+
+-**
+
+## Other Notes:
+
+### Docker Overview:
+
+  * One of the most disruptive technologies of recent past
+  * Every significant vendor (IBM, RedHat, Google, AWS, VMWare etc) have
+  annouced support for Docker
+  * First Docker conference was a huge success - with over 1000 attendees
+
+<strong> What is it? A tool to </strong>
+
+  * <em> Run applications </em> : An open source tool to run application
+  inside of a <em> Linux container </em> , a kind of light-weight virtual
+  machine
+  * <em> Package applications </em> : In addition to running, it also offers
+  tools to package containerised applciations through <em> Docker Files </em>
+  * <em> Distribute Application </em> : Create your own <em> Docker registires
+  or hubs </em>, a cloud service for sharing applications and automating
+  workflows.
+
+-**
+
+### Docker Architectural Overview
+
+ * Docker uses a client-server architecture
+ * The <em> Docker client </em> talks to the <em> Docker daemon </em>, which
+ does the heavy lifting of building, running and distributing your Docker
+ containers
+ * Both the Docker client and the daemon can run on the same system, or you
+ can connect a Docker client to a remote daemon.
+ * The Docker client and daemon communicate via sockets or through a
+ RESTful API.
+
+-**
+
+### Docker Containers vs Virtual Machines
+
+<strong> Virtual Machines </strong>
+Each virtualised application includes not only the
+applciation - which may be only 10s of MB - and the nescessary binaries and
+libraries, but also an entire guest operating system - which may weigh 10s of GB
+
+<strong> Docker </strong>
+The Docker Engine container comprises just the application and its
+dependencies. It runs as an isolated process in userspace on the host
+operating system, sharing the kernel with other containers
+
+<strong> Compared with Hypervisors, Docker which is OS-Level
+Virtualisation </strong>
+
+ *CPU Performance => native performance
+ * Memory Performance => few % for (optional) accounting
+ * Network Performance => small overhead; can be optimized to
+ zero overhead
+ * Creating a new base image takes a few seconds (copy-on-write)
+ * Apps in different containers can share the same binaries / libs
