@@ -12,6 +12,7 @@ Problem associated with cloud computing: Interoperability.
 It is a massive issue. They may have dependencies or inter-dependencies where
 they won’t work with each other. Like modifying one piece or software might
 bring down an entire stack.
+
 Isolation of software can be used to try and prevent inter-dependencies. We
 have a complex software system to ensure that all the virtual servers aren’t
 dependant on each other.
@@ -99,17 +100,18 @@ almost like running a full PC.
 
 Docker shares libraries and packages where appropriate
 
- * The container comprises an application and its depeendencies
+ * The container comprises an application and its dependencies
  * Containers serve to isolate processes which run in the solation
  in userspace on the host's operating system.
  * Traditional, hardware virutalisation, aims to create an entire
  virutal machine
 
-If we wanted to do that in <em><strong> VMware, KVM, Zen, EZ2 </em></strong> you have to create a full stack
-of all the software required for that virutalisation.
+If we wanted to do that in <em><strong> VMware, KVM, Zen, EZ2 </em></strong>
+you have to create a full stack of all the software required for that
+virutalisation.
 
-It massively increases the deployment size compared to docker due to lack of reuse
-of software.
+It massively increases the deployment size compared to docker due to lack of
+reuse of software.
 
 With a traditional VM, each application, each copy of an applicaiton,
 and each slight modification of an application requires creating an
@@ -214,6 +216,8 @@ Supports TCP/IP port mapping and forwarding.
   * Default command(s) to execute when the container is run
 
 Docker also is supported by nitrous.io
+
+-**
 
 ### Docker vs Virtual Machines Summary
 
