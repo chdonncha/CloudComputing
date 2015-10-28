@@ -1,0 +1,7 @@
+type into ubuntu virtual box:
+
+ssh ubuntu@ec2-52-30-121-185.eu-west-1.compute.amazonaws.com
+
+pass:
+
+06111993

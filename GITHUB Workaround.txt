@@ -1,0 +1,7 @@
+Okeanos	IPV6 Workaround for	GITHUB
+Insert the following line into /etc/hosts file. Edit the file
+as a sudo user.	
+  	
+Use	a local	Virtual	Machine	if there are issues with Okeanos
+- $sudo	vi /etc/hosts
+- $2a01:4f8:161:6453::2github.com

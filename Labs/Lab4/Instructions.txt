@@ -1,0 +1,11 @@
+Opened up Oracle Virtual box server.
+
+did not have wget installed so:
+ - sudo apt-get update
+ - sudo apt-get install wget
+
+error: could not lock /var/cache/apt/archives/lock
+docker failed to install
+
+to fix this remove:
+sudo rm /var/cache/apt/archives/lock

@@ -1,0 +1,230 @@
+# Docker Notes
+
+### Cloud computing problems:
+hardware infrastructures are different, differences
+need to be managed. A software component is used to bridge the services that
+sit on top of the hardware layer.
+Problem associated with cloud computing: Interoperability.
+
+ -**
+
+### Interoperability:
+It is a massive issue. They may have dependencies or inter-dependencies where
+they won’t work with each other. Like modifying one piece or software might
+bring down an entire stack.
+Isolation of software can be used to try and prevent inter-dependencies. We
+have a complex software system to ensure that all the virtual servers aren’t
+dependant on each other.
+
+Interoperability was solved by introducing a standardised container. We can put
+whatever we want in the container, and it’s sealed from the rest of the
+software to we can take it out when we need it.
+
+If we ship in containers, docker is a shipping container for source code, we
+solve the Interoperability issue by giving a standard way of putting code into
+an interface, which we can ship around to where we want.
+
+-**
+
+### Docker
+
+Runs virtually on a linux server
+
+There are many other software that use a similar approach to docker.
+The project aims to encapsulate the data in a linux environment through
+encapsulation.
+
+It allows us to build complex multi-node environments.
+
+We can install a webserver onto one container and we can build an API to
+get a webserver and cloud server to work with each other as long as the API
+stays the same.
+
+They can be then shipped to verious platforms and then build and implemented
+
+We can use this container service anywhere where the docker software is
+installed.
+
+Decoupling becomes a big issue. Build small lightweight containers.
+We can make the life cycle easy and consistant if we seperate everything out
+to containers, this is to avoid complex interactions between the containers.
+
+With a container we create all the software and configurations to run that
+software. This is so a device with specific configurations won't have to
+worry about it as the container will run in its own environment
+with its own provided configurations, and it is light on the load of the
+device.
+
+We can isolate peices of software from one another.
+
+### Why care? - Benefits of a Containerised System:
+
+-**
+
+ * Support segregation of duties
+ * Improves the speed and realiability of continous deployment and
+ continuous integration systems
+ * Significant preformance, costs, deployment, and portability
+ issues normally associated with VMs
+
+### In summary:
+
+-**
+
+A container is a small lightweight description of services
+and inside of that container we can then build an applciation with
+a specific API and then link those containers together to create
+well constructed, resiliant software stacks
+
+It offers a build ship and run model.
+
+You can install customised packages.
+
+Open and close ports.
+
+-**
+
+### Docker vs Vitrual Machine:
+
+Differences between sharing of operating system components within containers
+them selves.
+
+<strong> Traditional Server: </strong>
+  * Has a host operating system
+  * Hypervisor to facilitate virtual instances on top of that.
+
+To have multiple copies of that application running on a server you have to fully
+replicate the guest operating systems and the libraries associated with that,
+almost like running a full PC.
+
+Docker shares libraries and packages where appropriate
+
+ * The container comprises an application and its depeendencies
+ * Containers serve to isolate processes which run in the solation
+ in userspace on the host's operating system.
+ * Traditional, hardware virutalisation, aims to create an entire
+ virutal machine
+
+If we wanted to do that in <em><strong> VMware, KVM, Zen, EZ2 </em></strong> you have to create a full stack
+of all the software required for that virutalisation.
+
+It massively increases the deployment size compared to docker due to lack of reuse
+of software.
+
+With a traditional VM, each application, each copy of an applicaiton,
+and each slight modification of an application requires creating an
+entirely new VM
+
+A new application on host need only have the application and its
+binaries/libraries
+
+They are basically shared in the same space to allow the containers to work
+more efficently.
+
+-**
+
+### Making copies
+
+Traditional VM coppies require a Guest OS (takes the most harddisk space),
+Bins/Libs & App A.
+
+In Docker the copying of the Bins/Libs & App A are only required.
+
+-**
+
+### Testing and Qualification
+
+Service update must be tested and qualified
+
+Delta between an update and previously working configuration should be
+small - operations objective
+
+Invariably conflicts with the need to patch and advance the underlying
+software - developer's objective
+
+-**
+
+### Update Example (Contrived)
+
+Web service is running a version of PostgreSQL with a particular version
+of Memcached (a memory cache)
+
+Each service is known to work with a particular OS version, say
+Ubuntu 12.04
+
+A critical fix is required for PostgreSQL but that update will only work
+with a later version of Ubuntu
+
+The server OS would need to be updated but that update is not qualified
+to work with the current version of Memcached
+
+A newer version of Memcached would be need too
+  - This is known as dependency cascade
+
+-**
+
+### Update Example (cont'd)
+
+To make matters worse, new version of Memcached would not work
+with the middleware version it services.
+
+Now we could have further upstream dependency cascades.
+
+ * <strong> Solution #1: </strong> Split Memchached and PostgreSQl services onto
+ different VMs
+  * Further complicates the development mesh
+  * Forces singl-role-per VM policy, reducing flexibility
+ * <strong> Solution #2: </strong> Containerise the PostgreSQL and Memcached
+ services inside Docker
+
+-**
+
+### How Docker Works:
+
+Starting with a base image, say some version of Ubuntu, the developer
+can build a bespoke container for hosting a single component, say PostgreSQL
+
+The build image encapsulates the OS version, updates, libraries and
+application components
+
+Docker can animate the image into a running conttainer
+
+The container transparently runs a fully isolated OS instance within the host
+machine
+
+Resources outside the container are not visable to anything inside
+
+-**
+
+### How Docker Works (cont'd):
+
+Docker images are built on union filesystem (AUFS)
+
+Supports TCP/IP port mapping and forwarding.
+
+-**
+
+### Automated Image Building
+
+* Docker supports automated, script-driven image generation
+* A docker file specifies the following:
+  * Base Linux image
+  * Individual software installation commands
+  * TCP/IP ports to expose
+  * Default command(s) to execute when the container is run
+
+Docker also is supported by nitrous.io
+
+### Docker vs Virtual Machines Summary
+
+<strong>Traditional VMs:</strong>
+
+ * Heavy and slow in compreson to docker system
+ * takes full guest operating system for the basic requirement from which you
+ build your application on
+
+<strong>Docker:</strong>
+
+* allows each container to share each library within each library within the
+userspace so they be started and stopped very quickly and can be deployed much
+more efficently

@@ -1,0 +1,141 @@
+
+-----------------------------------------------------------------------------
+							Ubunutu Commands
+-----------------------------------------------------------------------------
+
+	sudo - run as admin
+
+	mkdir "name" - make folder named
+
+	nano "file name" - run the file in nano editor
+
+	> "filename.extension" - make file
+
+
+-----------------------------------------------------------------------------
+					Loggin into Amazon Virtual Machine 
+-----------------------------------------------------------------------------
+
+
+	type into console or gitbash:
+
+	ssh ubuntu@ec2-52-30-121-185.eu-west-1.compute.amazonaws.com
+
+	pass:
+
+	06111993
+
+
+-----------------------------------------------------------------------------
+							Docker Commands
+-----------------------------------------------------------------------------
+
+	docker run "file name" - run file through docker
+
+	docker images - show docker images
+
+	docker inspect - check the contents of the file
+
+	docker ps - show the container of the docker
+
+	docker --help - show help
+
+	docker rm -f - deletem image
+
+	docker kill "container name" - delete container (good for stopping server)
+
+	docker build -t "labelname" . - build image + name
+
+	docker ps - Show running containers
+
+	docker run -p 8080:5000 "container name" - port forwards 5000 to 8080 
+
+	http://ec2-52-30-121-185.eu-west-1.compute.amazonaws.com:8080/euler1 - run
+	forwarded port in the browser with the following euler file
+
+	docker run –d –p 8080:5000 -–name webserver1 lab6 - Create a container from
+	lab6 image and call the container webserver1. The -d runs the cointainer
+	in the background (as a daemon), and -p maps port 8080 to the container.
+
+	docker exec -it "container id" /bin/bash - will cd the user to the
+	cointainer directory in the bin/bash folder. *note: container id is found
+	by using 'docker ps' and finding the container id there.*
+
+	docker exec –it "container id" ls /data  - will show the data
+	inside the data folder in the specified container
+  	
+ 	docker stop "container name" - stop the running container
+
+ 	docker ps –a  - provide a list of all stopped containers
+
+ 	docker restart "container name" - restart the container *note:
+ 	useful for starting stopped containers, not just for restarting.*
+
+ 	docker run –d lab6 docker 
+
+ 	run –d –p 8080:5000 lab6 
+
+ 	docker run –d –p 8080:5000 –v $(pwd)/data:/data --name "givecontaineraname"
+ 	lab6 - mount a local container
+
+ 	exit - breakout of the container
+
+ 	curl "dns address:portnumber" - checks to see if the server is working on console,
+ 	can be handy if you are not sure if the server is running.
+
+ 	docker run –d --name uploader1 --volumes-from "name of container to connect to" lab6
+ 	- runs a new container and connects it to another so it can run off each other.
+  
+
+-----------------------------------------------------------------------------
+						   	  Quick Quiz
+-----------------------------------------------------------------------------
+
+1.
+- Name 3 ways to verify if data has been uploaded to a containers/data directory
+
+	-	We manually explore the container by using: 
+			-	docker exec –it <containerid> /bin/bash
+
+	-	Alternatively we can use the following command to use ls to just check
+		the contents of the container rather than exploring it manually:
+			-	docker exec –it <containerid> ls /data 
+
+	- 	The 3rd way we can use to check the contents of the container is to actually
+  		go onto the webpage of the container when the server is running, and using
+ 		 the server.py code already provided it displays the files that are
+ 		 present within the container.
+
+2.
+- What is the difference between *docker run* and *docker restart*
+	-	Docker restart allows you to turn containers that are already
+		inactive back on. Docker run allows you to start a new container.
+3.
+- What does docker *docker -ps a* do?
+	-	Using *-ps a* it lists processes that are currently running. However using
+		*docker ps -a* we can see the docker processes that are currently running.
+4.
+- How do you find the DNSname of the virtual machine you are using to test from
+  browser
+  	- 	The DNSname of the virutal machine I am currently using is:
+  		"ubuntu@ec2-52-30-121-185.eu-west-1.compute.amazonaws.com".
+5.
+- What does *docker run -d* do?
+	- 	It runs the docker image as a daemon, meaning that the server runs
+		in the background.
+6.
+- What does *docker tag* do?
+	-	Allows the user to place a optional tag onto the container.
+
+7.
+- What does *docker logs -f* do?
+	-	Using the command *docker logs -f "containername"*, a container
+		server will be started and any actions the server undertakes will
+		provide logs in the screen in which the server is running from.
+
+
+-----------------------------------------------------------------------------
+							Flask Commands
+-----------------------------------------------------------------------------
+	
+	$ sudo apt-get install python-virtualenv - Install virtualenv
